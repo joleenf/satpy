@@ -40,6 +40,8 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+SENSOR = {1: "NOAA-N", 2: "NOAA-P", 3: "Metop-A", 4: "Metop-B", 5: "SNPP", 6: "SSMI-17", 7: "SSMI-18"}
+
 class MimicTPW2FileHandler(NetCDF4FileHandler):
     """NetCDF4 reader for MIMC TPW."""
 
@@ -145,8 +147,8 @@ class MimicTPW2FileHandler(NetCDF4FileHandler):
         metadata.update(data.attrs)
         metadata.update(info)
         metadata.update({
-            'platform_shortname': 'aggregated microwave',
-            'sensor': 'mimic',
+            'platform_shortname': 'mimic product',
+            'sensor': list(SENSOR.values()),
             'start_time': self.start_time,
             'end_time': self.end_time,
         })
